@@ -15,7 +15,7 @@ const containerStyle = {
 };
 
 // Replace with your Google Maps API key
-const googleMapsApiKey = 'AIzaSyBVzhfAB_XLqaayJkOSuThEdaK4vifdxAI';
+const googleMapsApiKey = '';
 
 function Homepage() {
   const [location, setLocation] = useState({ lat: -34.397, lng: 150.644 });
@@ -44,15 +44,15 @@ function Homepage() {
         <MainContent />
         <Footer />
         <MapsOverhshadow />
-        <LoadScript googleMapsApiKey={googleMapsApiKey}>
-      <GoogleMap
+        {/*<LoadScript googleMapsApiKey={googleMapsApiKey}>
+       <GoogleMap
         mapContainerStyle={containerStyle}
         center={location}
         zoom={10}
       >
         <Marker position={location} />
-      </GoogleMap>
-    </LoadScript>
+      </GoogleMap> 
+    </LoadScript>*/}
     </>
   );
 }
