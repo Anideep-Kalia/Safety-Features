@@ -20,23 +20,23 @@ const googleMapsApiKey = '';
 function Homepage() {
   const [location, setLocation] = useState({ lat: -34.397, lng: 150.644 });
 
-  const fetchLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          });
-        },
-        () => {
-          alert('Geolocation is not supported by this browser.');
-        }
-      );
-    }
-  };
+  // const fetchLocation = () => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         setLocation({
+  //           lat: position.coords.latitude,
+  //           lng: position.coords.longitude
+  //         });
+  //       },
+  //       () => {
+  //         alert('Geolocation is not supported by this browser.');
+  //       }
+  //     );
+  //   }
+  // };
   useEffect(() => {
-    fetchLocation();
+    // fetchLocation();
   }, []);
   return (
     <>
