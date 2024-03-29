@@ -1,11 +1,17 @@
 import react from 'react'
-import AdminNavbar from "./AdminNavbar"
+import AdminNavbar from "../../components/admin/AdminNavbar"
+import AdminSidebar from "../../components/admin/AdminSidebar"
+
 const Admin=()=>{
-    return <>
-    hello world
-    <AdminNavbar/>
+    return <div className='flex'>
+        <div className='flex-initial w-56'>
+            <AdminSidebar/>
+        </div>
+     <div className='flex-auto'>
+            <AdminNavbar/>
+        </div>
     
-    </>
+    </div>
 }
 
 export default Admin
