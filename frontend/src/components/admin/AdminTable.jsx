@@ -44,7 +44,6 @@ export default function AdminTable() {
               data-popper-reference-hidden=""
               data-popper-escaped=""
               data-popper-placement="top"
-            //   style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);"
             >
               <ul
                 className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
