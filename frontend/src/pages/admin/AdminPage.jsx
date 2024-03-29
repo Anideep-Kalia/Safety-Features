@@ -1,6 +1,7 @@
 import react from 'react'
 import AdminNavbar from "../../components/admin/AdminNavbar"
 import AdminSidebar from "../../components/admin/AdminSidebar"
+import AdminTable from '../../components/admin/AdminTable'
 
 const Admin=()=>{
     return <div className='flex'>
@@ -9,6 +10,7 @@ const Admin=()=>{
         </div>
      <div className='flex-auto'>
             <AdminNavbar/>
+            <AdminTable/>
         </div>
     
     </div>
