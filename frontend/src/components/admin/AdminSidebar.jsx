@@ -29,6 +29,7 @@ const Sidebar = () => {
         </div>
         <div className="flex justify-center items-center mt-10">
           <button
+            
             type="button"
             class="text-white bg-[#4E7690] hover:bg-[#354c5c] focus:ring-4 focus:ring-blue-300 rounded-lg text-xs px-5 py-2.5 me-2 mb-2 focus:outline-none dark:focus:ring-blue-800"
           >
