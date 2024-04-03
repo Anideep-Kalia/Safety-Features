@@ -5,7 +5,7 @@ import "./App.css"
 import Map from "./user-side/Map"
 import Trial from "./user-side/Trial"
 import AdminLoginPage from "./pages/admin/AdminLoginPage";
-
+import Stage1 from "./components/admin/AddNewLocationPopup/StageOne";
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
         <Route path='/map' element={<Map />} />
         <Route path='/trial' element={<Trial />} />
         <Route path='/admin/login' element={<AdminLoginPage />} />
+        <Route path='/abcd' element={<Stage1 />} />
       </Routes>
     </>
   );
