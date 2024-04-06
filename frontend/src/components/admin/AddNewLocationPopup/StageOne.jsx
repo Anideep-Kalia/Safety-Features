@@ -1,5 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
 // import "./Stage1.css";
 const Stage1 = ({ nextStage }) => {
   return (
@@ -45,29 +44,16 @@ const Stage1 = ({ nextStage }) => {
     </div>
     <button
         className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-20 m-auto"
-=======
-
-const Stage1 = ({ nextStage }) => {
-  return (
-    <div className="bg-white p-8 rounded ">
-      <h2 className="text-lg font-bold mb-4">Stage 1</h2>
-      <p>This is the content of stage 1.</p>
-      <button
-        className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
->>>>>>> 75ed98670869091004a7cc7b88e97bcf08d24ea4
         onClick={nextStage}
       >
         Next
       </button>
     </div>
-<<<<<<< HEAD
 
    </form>
 
    {/* </div> */}
    </>
-=======
->>>>>>> 75ed98670869091004a7cc7b88e97bcf08d24ea4
   );
 };
 
