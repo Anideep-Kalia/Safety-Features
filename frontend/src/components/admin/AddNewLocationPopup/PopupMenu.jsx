@@ -2,7 +2,6 @@ import React, { useState ,useEffect ,useRef} from "react";
 import Stage1 from "./StageOne";
 import Stage2 from "./StageTwo";
 import Stage3 from "./StageThree";
-import { Transition } from '@headlessui/react';
 import { IoMdClose } from "react-icons/io";
 
 export default function PopupMenu({ isPopupOpen, setIsPopupOpen }) {
