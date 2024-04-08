@@ -1,10 +1,11 @@
 const mongoose=require('mongoose');
-const mongoURI="mongodb://localhost:27017/easynotes"
 
-const connectToMongo=()=>{
-    mongoose.connect(mongoURI,()=>{
-        console.log("Connected to Mongo succeesfully");
-    })
+exports.dbConnection =async()=>{
+    mongoose.set('strictQuery',true)
+    await mongoose.connect('mongodb+srv://anideepkalia71:anideepkalia71@cluster0.4bgy5md.mongodb.net/')
+        .then(()=>{
+            console.log('Db Connected')
+        }).catch((err)=>{
+            console.log(err)
+        })
 }
-
-module.exports=connectToMongo;
