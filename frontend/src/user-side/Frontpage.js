@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import pageContext from "../context/notes/pageContext";
+import pageContext from "./all pages/notes/pageContext";
 
 const Front = () => {
   const { places, addPlace, deletePlace, editPlace, getPlaces } = useContext(pageContext);
