@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { TbRefresh } from "react-icons/tb";
 import { IoFilterOutline } from "react-icons/io5";
+import { IoSearch } from "react-icons/io5";
 
 export default function AdminTable() {
   const tableData = [
@@ -29,7 +30,7 @@ export default function AdminTable() {
     <>
       <div className="relative overflow-x-auto sm:rounded-lg m-4 border-solid border border-gray-300">
         <div className="flex flex-column sm:flex-row flex-grow space-y-4 sm:space-y-0 items-center justify-between p-2 pt-4 pb-4">
-          <div >
+          <div>
             <div className="ml-2 flex border border-gray-200 rounded-lg overflow-hidden shadow-sm">
               <button className="flex-1 py-2 px-4 text-sm text-[#4E7690] border-r border-gray-200 hover:bg-[#EAECF0] transition-colors duration-300 cursor-pointer shadow-sm">
                 Today
@@ -42,13 +43,16 @@ export default function AdminTable() {
               </button>
             </div>
           </div>
-          
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+          <label for="table-search" class="sr-only">
+            Search
+          </label>
+
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center pl-3 pointer-events-none">
               <svg
-                className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                class="w-5 h-5 text-gray-500 dark:text-gray-400"
                 aria-hidden="true"
-                fill="currentColor"
+                fill="currentColor" 
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -62,7 +66,7 @@ export default function AdminTable() {
             <input
               type="text"
               id="table-search"
-              className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 shadow-sm focus:ring-blue-500 focus:border-blue-500 "
+              class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search for items"
             />
           </div>
@@ -70,17 +74,18 @@ export default function AdminTable() {
             <div className="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
               <IoFilterOutline />
             </div>
-            <div className="block p-2 ps-10 text-sm">filter</div>
+            <div className="block p-2 ps-10 text-sm">Filter</div>
           </div>
-          <div className="relative mr-2">
+          <div className="relative mr-2 text-sm">
             <div className="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
               <IoFilterOutline />
             </div>
-            <button className="block p-2 ps-10 text-sm border-lg boder-solid border border-black-200 rounded-lg shadow-sm hover:bg-gray-200">Sort By</button>
+            <button className="block p-2 ps-10 text-sm border-lg boder-solid border border-black-200 rounded-lg shadow-sm hover:bg-gray-200">
+              Sort By
+            </button>
           </div>
         </div>
-        
-        
+
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-gray-400">
           <thead className="text-xs text-[#4E7690] bg-[#EAECF0] border-solid border border-gray-300">
             <tr>
@@ -154,7 +159,6 @@ export default function AdminTable() {
             </tr>
           </thead>
           <tbody>
-            
             {tableData.map((item) => (
               <tr
                 key={item.id}
