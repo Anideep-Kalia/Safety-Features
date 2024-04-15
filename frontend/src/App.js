@@ -5,8 +5,6 @@ import "./App.css"
 import AdminLoginPage from "./pages/admin/AdminLoginPage";
 import FrontPage from "./user-side/Frontpage";
 import PageState from './context/pages/PageState';
-import Stage1 from "./components/admin/AddNewLocationPopup/StageOne";
-
 function App() {
   return (
     <>
@@ -16,7 +14,6 @@ function App() {
         <Route path='/admin' element={<Admin/>}/>
         <Route path='/front' element={<FrontPage/>}/>
         <Route path='/admin/login' element={<AdminLoginPage />} />
-        <Route path='/abcd' element={<Stage1 />} />
       </Routes>
       </PageState>
     </>
