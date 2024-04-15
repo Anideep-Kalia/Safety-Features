@@ -1,5 +1,8 @@
 import React from 'react';
+<<<<<<< HEAD
 import "./Stage1.css";
+=======
+>>>>>>> b093b11fbcaa1d3b4fb5cd448711aba43f431b76
 const Stage2 = ({ nextStage, prevStage }) => {
   return (
     <>
@@ -36,7 +39,11 @@ const Stage2 = ({ nextStage, prevStage }) => {
           Previous
         </button>
         <button
+<<<<<<< HEAD
           className="bg text-white font-bold py-2 px-4 rounded "
+=======
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
+>>>>>>> b093b11fbcaa1d3b4fb5cd448711aba43f431b76
           onClick={nextStage}
           >
           Next

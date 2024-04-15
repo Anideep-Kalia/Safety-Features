@@ -1,152 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
+import { FaRegEdit } from "react-icons/fa";
+import { TbRefresh } from "react-icons/tb";
+import { IoFilterOutline } from "react-icons/io5";
+import { IoSearch } from "react-icons/io5";
 
 export default function AdminTable() {
+  const tableData = [
+    {
+      id: 1,
+      locationName: "IMT Plice Station",
+      city: "Silver",
+      distance: "Laptop",
+      status: "$2999",
+      timeLeft: "1 hr 30 minutes",
+      access: 1,
+    },
+    {
+      id: 2,
+      locationName: "Sector 1 Police Station",
+      city: "White",
+      distance: "Laptop PC",
+      status: "$1999",
+      timeLeft: "2 hrs",
+      access: 2,
+    },
+  ];
+
   return (
     <>
-      <div className="relative overflow-x-auto sm:rounded-lg p-2">
-        <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
+      <div className="relative overflow-x-auto sm:rounded-lg m-4 border-solid border border-gray-300">
+        <div className="flex flex-column sm:flex-row flex-grow space-y-4 sm:space-y-0 items-center justify-between p-2 pt-4 pb-4">
           <div>
-            <button
-              id="dropdownRadioButton"
-              data-dropdown-toggle="dropdownRadio"
-              className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-              type="button"
-            >
-              <svg
-                className="w-3 h-3 text-gray-500 dark:text-gray-400 me-3"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z" />
-              </svg>
-              Last 30 days
-              <svg
-                className="w-2.5 h-2.5 ms-2.5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 10 6"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m1 1 4 4 4-4"
-                />
-              </svg>
-            </button>
-            <div
-              id="dropdownRadio"
-              className="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 "
-              data-popper-reference-hidden=""
-              data-popper-escaped=""
-              data-popper-placement="top"
-            >
-              <ul
-                className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
-                aria-labelledby="dropdownRadioButton"
-              >
-                <li>
-                  <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input
-                      id="filter-radio-example-1"
-                      type="radio"
-                      value=""
-                      name="filter-radio"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                    />
-                    <label
-                      for="filter-radio-example-1"
-                      className="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"
-                    >
-                      Last day
-                    </label>
-                  </div>
-                </li>
-                <li>
-                  <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input
-                      checked=""
-                      id="filter-radio-example-2"
-                      type="radio"
-                      value=""
-                      name="filter-radio"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                    />
-                    <label
-                      for="filter-radio-example-2"
-                      className="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"
-                    >
-                      Last 7 days
-                    </label>
-                  </div>
-                </li>
-                <li>
-                  <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input
-                      id="filter-radio-example-3"
-                      type="radio"
-                      value=""
-                      name="filter-radio"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                    />
-                    <label
-                      for="filter-radio-example-3"
-                      className="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"
-                    >
-                      Last 30 days
-                    </label>
-                  </div>
-                </li>
-                <li>
-                  <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input
-                      id="filter-radio-example-4"
-                      type="radio"
-                      value=""
-                      name="filter-radio"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                    />
-                    <label
-                      for="filter-radio-example-4"
-                      className="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"
-                    >
-                      Last month
-                    </label>
-                  </div>
-                </li>
-                <li>
-                  <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input
-                      id="filter-radio-example-5"
-                      type="radio"
-                      value=""
-                      name="filter-radio"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                    />
-                    <label
-                      for="filter-radio-example-5"
-                      className="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"
-                    >
-                      Last year
-                    </label>
-                  </div>
-                </li>
-              </ul>
+            <div className="ml-2 flex border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+              <button className="flex-1 py-2 px-4 text-sm text-[#4E7690] border-r border-gray-200 hover:bg-[#EAECF0] transition-colors duration-300 cursor-pointer shadow-sm">
+                Today
+              </button>
+              <button className="flex-2 py-2 px-4 text-sm text-[#4E7690] border-r border-gray-200 hover:bg-[#EAECF0] transition-colors duration-300 cursor-pointer">
+                Last 7 Days
+              </button>
+              <button className="flex-3 py-2 px-4 text-sm text-[#4E7690] hover:bg-[#EAECF0]  transition-colors duration-300 cursor-pointer">
+                Custom Day
+              </button>
             </div>
           </div>
-          <label for="table-search" className="sr-only">
+          <label for="table-search" class="sr-only">
             Search
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center pl-3 pointer-events-none">
               <svg
-                className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                class="w-5 h-5 text-gray-500 dark:text-gray-400"
                 aria-hidden="true"
-                fill="currentColor"
+                fill="currentColor" 
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -160,20 +66,35 @@ export default function AdminTable() {
             <input
               type="text"
               id="table-search"
-              className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search for items"
             />
           </div>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+              <IoFilterOutline />
+            </div>
+            <div className="block p-2 ps-10 text-sm">Filter</div>
+          </div>
+          <div className="relative mr-2 text-sm">
+            <div className="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+              <IoFilterOutline />
+            </div>
+            <button className="block p-2 ps-10 text-sm border-lg boder-solid border border-black-200 rounded-lg shadow-sm hover:bg-gray-200">
+              Sort By
+            </button>
+          </div>
         </div>
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-gray-400">
+          <thead className="text-xs text-[#4E7690] bg-[#EAECF0] border-solid border border-gray-300">
             <tr>
               <th scope="col" className="p-4">
                 <div className="flex items-center">
                   <input
                     id="checkbox-all-search"
                     type="checkbox"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-[#4E7690] bg-gray-100 border-gray-300 rounded focus:ring-[#4E7690] checked:border-[#4E7690] checked:bg-[#4E7690] checked:before:bg-gray-900"
                   />
                   <label for="checkbox-all-search" className="sr-only">
                     checkbox
@@ -181,211 +102,136 @@ export default function AdminTable() {
                 </div>
               </th>
               <th scope="col" className="px-6 py-3">
-                Product name
+                {/* <div className="flex">
+                  <span>Location Name</span>
+                  <span className="pt-1 pl-2">
+                    <FaArrowDown />
+                  </span>
+                </div> */}
+                Location Name
+              </th>
+              <th scope="col" className="px-6 py-3 ">
+                {/* <div className="flex">
+                  <span>City</span>
+                  <span className="pt-1 pl-2">
+                    <FaArrowDown />
+                  </span>
+                </div> */}
+                City
               </th>
               <th scope="col" className="px-6 py-3">
-                Color
+                {/* <div className="flex">
+                  <span>Distance</span>
+                  <span className="pt-1 pl-2">
+                    <FaArrowDown />
+                  </span>
+                </div> */}
+                Distance
               </th>
               <th scope="col" className="px-6 py-3">
-                Category
+                {/* <div className="flex">
+                  <span>Status</span>
+                  <span className="pt-1 pl-2">
+                    <FaArrowDown />
+                  </span>
+                </div> */}
+                Status
               </th>
               <th scope="col" className="px-6 py-3">
-                Price
+                {/* <div className="flex">
+                  <span>Time Left</span>
+                  <span className="pt-1 pl-2">
+                    <FaArrowDown />
+                  </span>
+                </div> */}
+                Time Left
               </th>
               <th scope="col" className="px-6 py-3">
-                Action
+                {/* <div className="flex">
+                  <span>Access</span>
+                  <span className="pt-1 pl-2">
+                    <FaArrowDown />
+                  </span>
+                </div> */}
+                Access
               </th>
+              <th scope="col" className="px-6 py-3"></th>
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <td className="w-4 p-4">
-                <div className="flex items-center">
-                  <input
-                    id="checkbox-table-search-1"
-                    type="checkbox"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label for="checkbox-table-search-1" className="sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </td>
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            {tableData.map((item) => (
+              <tr
+                key={item.id}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
-                Apple MacBook Pro 17"
-              </th>
-              <td className="px-6 py-4">Silver</td>
-              <td className="px-6 py-4">Laptop</td>
-              <td className="px-6 py-4">$2999</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                <td className="w-4 p-4">
+                  <div className="flex items-center">
+                    <input
+                      id={`checkbox-table-${item.id}`}
+                      type="checkbox"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                      htmlFor={`checkbox-table-${item.id}`}
+                      className="sr-only"
+                    >
+                      checkbox
+                    </label>
+                  </div>
+                </td>
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  Edit
-                </a>
-              </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <td className="w-4 p-4">
-                <div className="flex items-center">
-                  <input
-                    id="checkbox-table-search-2"
-                    type="checkbox"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label for="checkbox-table-search-2" className="sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </td>
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Microsoft Surface Pro
-              </th>
-              <td className="px-6 py-4">White</td>
-              <td className="px-6 py-4">Laptop PC</td>
-              <td className="px-6 py-4">$1999</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  Edit
-                </a>
-              </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <td className="w-4 p-4">
-                <div className="flex items-center">
-                  <input
-                    id="checkbox-table-search-3"
-                    type="checkbox"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label for="checkbox-table-search-3" className="sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </td>
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Magic Mouse 2
-              </th>
-              <td className="px-6 py-4">Black</td>
-              <td className="px-6 py-4">Accessories</td>
-              <td className="px-6 py-4">$99</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  Edit
-                </a>
-              </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <td className="w-4 p-4">
-                <div className="flex items-center">
-                  <input
-                    id="checkbox-table-3"
-                    type="checkbox"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label for="checkbox-table-3" className="sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </td>
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Apple Watch
-              </th>
-              <td className="px-6 py-4">Silver</td>
-              <td className="px-6 py-4">Accessories</td>
-              <td className="px-6 py-4">$179</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  Edit
-                </a>
-              </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <td className="w-4 p-4">
-                <div className="flex items-center">
-                  <input
-                    id="checkbox-table-3"
-                    type="checkbox"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label for="checkbox-table-3" className="sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </td>
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                iPad
-              </th>
-              <td className="px-6 py-4">Gold</td>
-              <td className="px-6 py-4">Tablet</td>
-              <td className="px-6 py-4">$699</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  Edit
-                </a>
-              </td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <td className="w-4 p-4">
-                <div className="flex items-center">
-                  <input
-                    id="checkbox-table-3"
-                    type="checkbox"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label for="checkbox-table-3" className="sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </td>
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Apple iMac 27"
-              </th>
-              <td className="px-6 py-4">Silver</td>
-              <td className="px-6 py-4">PC Desktop</td>
-              <td className="px-6 py-4">$3999</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  Edit
-                </a>
-              </td>
-            </tr>
+                  {item.locationName}
+                </th>
+                <td className="px-6 py-4">{item.city}</td>
+                <td className="px-6 py-4">{item.distance}</td>
+                <td className="px-6 py-4 flex items-center">
+                  <span>{item.status}</span>
+                  <span className="mt-1 pl-2">
+                    <TbRefresh />
+                  </span>
+                </td>
+                <td className="px-6 py-4">{item.timeLeft}</td>
+                <td className="px-6 py-4">{item.access}</td>
+                <td className="px-6 py-4 text-[#4E7690]">
+                  <FaRegEdit />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
+        <nav
+          class="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4 mb-2"
+          aria-label="Table navigation p-2"
+        >
+          <span class="text-sm font-normal text- text-[#4E7690] mb-4 md:mb-0 block w-full md:inline md:w-auto ml-2">
+            <span class="font-normal text-[#4E7690] dark:text-white">1-15</span>{" "}
+            of{" "}
+            <span class="font-normal text-[#4E7690] dark:text-white">
+              1000 items
+            </span>
+          </span>
+          <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8 mr-2 mb-2">
+            <li>
+              <a
+                href="#"
+                class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                Previous
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </>
   );

@@ -1,5 +1,4 @@
 import React from 'react';
-import "./Stage1.css";
 import image from "../../../images/image.png";
 const Stage3 = ({ prevStage, handleClose }) => {
   return (
