@@ -55,7 +55,8 @@
   .buttons-section {
     width: 172px;
     height: 80px;
-    background-color: yellow;
+    background-color: white;
+
   }
   
   .chief-minister-section {
@@ -79,4 +80,6 @@
     margin: 0;
     margin-top: 5px;
   }
-  
+  .bg{
+    background-color: #d8e4ec;
+  }

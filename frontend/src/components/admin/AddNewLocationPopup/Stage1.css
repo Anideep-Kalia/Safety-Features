@@ -1,34 +1,6 @@
-*{
-    margin: 0;
-    padding: 0;
+.text{
+color:#4E7690;
 }
-/* .container{
-    margin: 1rem;
-  
-} */
-/* form{
-    width:80vw;
-    height:70vh;
-    display: flex;
-    flex-direction: column;
-} */
-/* .cont1{
-    display: flex;
-}
-.cont3{
-    display: flex;
-}
-.cont4{
-    display: flex;
-} */
-.heading{
-    margin-top: 2rem;
-    margin-left: 5rem;
-    font-size: 1.2rem;
-    font-weight:bolder;
-}
-.para{
-    margin-left: 5rem;
-    /* font-size: 0.9rem; */
-    color: #4E7690;
+.bg{
+    background-color: #4E7690;
 }
