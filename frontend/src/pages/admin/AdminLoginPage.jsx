@@ -26,7 +26,7 @@ export default function AdminLoginPage(){
       if(json.success){
         // Save the auth token and redirect
         localStorage.setItem('token',json.authtoken);
-        navigate("/");        //this is redirecting me to the home page after I login
+        navigate("/admin");        //this is redirecting me to the home page after I login
         console.log("Logged In SUCCESSFULLY","success")
       }
       else{
