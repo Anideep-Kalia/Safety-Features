@@ -30,9 +30,9 @@ const PageState = (props) => {
     getCoordinates(); // Call the function to fetch coordinates when the component mounts
   }, []); // Empty dependency array means this effect runs only once, equivalent to componentDidMount
 
-  useEffect(() => {
-    console.log(userCoordinates); // Log userCoordinates whenever it changes
-  }, [userCoordinates]); // This effect runs whenever userCoordinates changes
+  // useEffect(() => {
+  //   console.log(userCoordinates); // Log userCoordinates whenever it changes
+  // }, [userCoordinates]); // This effect runs whenever userCoordinates changes
 
   const getPlaces = async () => {
     try {

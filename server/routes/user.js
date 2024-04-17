@@ -9,6 +9,7 @@ const JWT_SECRET='fortoken';
 
 
 // Route 1:
+// firebase to be used because credntials are more safe in firebase. Safer
 router.post('/login',[
   // here we have use code form the express validate
   body('password','Password cannot be blank').exists()],

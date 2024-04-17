@@ -62,8 +62,8 @@ function App() {
     }
 }, [userCoordinates]);
 
-
-  const maxDistance = 7;   // allowed radius around center
+// We can give access of location by either area defined in google maps/ or by defining radius and location as centre point or combination of both; it should be defined after getting inputs by police officials.
+  const maxDistance = 7;
 
   const handleClick = async (e) => {
       // Get latitude and longitude of the clicked location

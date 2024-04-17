@@ -122,8 +122,8 @@ router.post('/login',[
     }
   })
 
+  
 //   Router 4
-
 router.post('/register', [
     body('password').isLength({ min: 5 }),
     body('name').isLength({ min: 3 }),

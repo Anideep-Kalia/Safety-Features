@@ -15,7 +15,6 @@ router.get('/fetchallplaces', async (req, res) => {
 });
 
 // Route 2: Add a new place
-// Route 2: Add a new place
 router.post("/addplace", async (req, res) => {
     try {
         const errors = validationResult(req);
