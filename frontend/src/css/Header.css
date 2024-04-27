@@ -1,19 +1,18 @@
 .header-container {
     background-color: #4e7690;
-    height: 3.125rem;
+    height: 3rem;
     width: 100%;
-    position: fixed;
+    /* position: fixed;
     top: 0;
-    left: 0;
-    z-index: 1000;
+    left: 0; */
     display: flex;
     align-items: center;
     justify-content: center;
   }
   
   .header-icon {
-    width: 30px;
-    height: 30px;
+    width: 3.875rem;
+    height: 1.875rem;
     margin-right: 5px;
   }
   
