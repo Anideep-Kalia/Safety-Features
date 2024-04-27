@@ -122,6 +122,24 @@ import {
             )}
           </GoogleMap>
         </Box>
+        <div className='flex flex-row justify-center items-center'>
+        <Box
+          p={4}
+          borderRadius='lg'
+          m={4}
+          bgColor='white'
+          shadow='base'
+          minW='container.md'
+          zIndex='1'
+          className='rounded-3xl'
+        >
+          <HStack spacing={4} mt={4} justifyContent='space-between'>
+           <input
+           type='text'
+           className='border w-[23rem] h-[4.75rem] rounded-3xl bg-[#000000] opacity-5'
+           />
+          </HStack>
+        </Box>
         <Box
           p={4}
           borderRadius='lg'
@@ -145,6 +163,8 @@ import {
             />
           </HStack>
         </Box>
+        </div>
+        
       </Flex>
     )
   }
