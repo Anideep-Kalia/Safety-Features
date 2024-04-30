@@ -14,10 +14,10 @@ function Header() {
         </p>
         <img src="new.png" alt="" className="header-icon" />
       </div>
-      <div className="relative flex w-full flex-row justify-between items-center h-[6.875rem] px-[3.25rem]">
+      <div className="relative flex w-full flex-row justify-between items-center h-[6rem] px-[3.25rem]">
         <div className="flex flex-row justify-center items-center">
-          <img src={emblem} alt="" className="w-[4rem] h-[5.6rem] " />
-          <img src={police} alt="" className="w-[5rem] h-[5rem] ml-2 mr-6" />
+          <img src={emblem} alt="" className="w-[4rem] h-[5.1rem] " />
+          <img src={police} alt="" className="w-[4.5rem] h-[4.5rem] ml-2 mr-6" />
           <h1 className="text-2xl font-semibold">Rajasthan Police</h1>
         </div>
         <div className="flex flex-row justify-center items-center gap-6 ">
@@ -27,8 +27,8 @@ function Header() {
             <img src="lang3.png" alt="" className=" w-[3.75rem] h-9" />
           </div>
           <div className="flex flex-col justify-center items-center ">
-            <img src="pic.png" alt="" className=" w-10 h-10" />
-            <p className="font-semibold text-lg">
+            <img src="pic.png" alt="" className=" w-10 h-8" />
+            <p className="font-semibold text-[1.125rem] leading-4">
               Shri Bhajan Lal Sharma
             </p>
             <p className=" font-semibold text-lg">
@@ -38,7 +38,7 @@ function Header() {
           </div>
         </div>
       </div>
-      <div className="flex flex-row justify-between items-center bg-[#4e7690] w-full h-[4.5rem] px-[3.25rem]">
+      <div className="flex flex-row justify-between items-center bg-[#4e7690] w-full h-[3.5rem] px-[3.25rem]">
         <div className="flex flex-row justify-center items-center text-white gap-3">
           <GiHamburgerMenu  className=" w-6 h-6"/>
           <IoMdHome className=" w-6 h-6"/>
