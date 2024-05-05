@@ -1,6 +1,6 @@
 import pageContext from "./pageContext";
 import { useState, useEffect } from "react";
-
+import { useCallback } from "react";
 const PageState = (props) => {
   const host = "http://localhost:5000";
 
@@ -26,21 +26,21 @@ const PageState = (props) => {
     }
   };
 
-  useEffect(() => {
-    getCoordinates(); // Call the function to fetch coordinates when the component mounts
-  }, []); // Empty dependency array means this effect runs only once, equivalent to componentDidMount
+  // useEffect(() => {
+  //   getCoordinates(); // Call the function to fetch coordinates when the component mounts
+  // }, []); // Empty dependency array means this effect runs only once, equivalent to componentDidMount
 
   // useEffect(() => {
   //   console.log(userCoordinates); // Log userCoordinates whenever it changes
   // }, [userCoordinates]); // This effect runs whenever userCoordinates changes
 
-  const getPlaces = async () => {
+  const getPlaces = useCallback(async() => {
     try {
       const response = await fetch(`${host}/api/place/fetchallplaces`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": localStorage.getItem("token"),
+         
         },
       });
       const json = await response.json();
@@ -49,7 +49,7 @@ const PageState = (props) => {
     } catch (error) {
       console.error(error.message);
     }
-  };
+  },[places]);
 
   const addPlace = async (name, address, coordinates, expiration) => {
     try {
