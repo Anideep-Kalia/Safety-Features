@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import bhajan_lal from "../../images/bhajan_lal.webp";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
@@ -6,6 +7,7 @@ import { IoIosArrowBack } from "react-icons/io";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -16,6 +18,8 @@ const Navbar = () => {
       setIsOpen(false);
     }
   };
+  
+
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
@@ -108,13 +112,14 @@ const Navbar = () => {
                     >
                       Profile
                     </a>
-                    <a
-                      href="#"
+                    <button
+                      onClick={() => {localStorage.removeItem('token');
+                    navigate('/admin/login');}}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       role="menuitem"
                     >
                       Logout
-                    </a>
+                    </button>
                   </div>
                 </div>
               )}

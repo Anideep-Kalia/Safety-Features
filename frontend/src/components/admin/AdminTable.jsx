@@ -1,30 +1,60 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { TbRefresh } from "react-icons/tb";
 import { IoFilterOutline } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
-
+import pageContext from "../../context/pages/pageContext";
+import { useContext } from "react";
 export default function AdminTable() {
-  const tableData = [
-    {
-      id: 1,
-      locationName: "IMT Plice Station",
-      city: "Silver",
-      distance: "Laptop",
-      status: "$2999",
-      timeLeft: "1 hr 30 minutes",
-      access: 1,
-    },
-    {
-      id: 2,
-      locationName: "Sector 1 Police Station",
-      city: "White",
-      distance: "Laptop PC",
-      status: "$1999",
-      timeLeft: "2 hrs",
-      access: 2,
-    },
-  ];
+
+  const context = useContext(pageContext);
+  const [status, setStatus] = useState('Temporary');
+  const [center, setCenter] =  useState( {lat: null, lng: null })
+
+
+  const { places, addPlace, deletePlace, editPlace, getPlaces,getCoordinates, userCoordinates } = useContext(pageContext);
+  
+
+ 
+
+  function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radius of the earth in km
+    const dLat = deg2rad(lat2 - lat1);  // deg2rad below
+    const dLon = deg2rad(lon2 - lon1);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2)
+        ;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c; // Distance in km
+    return distance;
+}
+
+function deg2rad(deg) {
+    return deg * (Math.PI / 180)
+}
+
+  
+useEffect(() => {
+  getPlaces();
+  // comment this after login and signup is made
+  localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjYxMzYwMjM2MmFiYmE3YWY4ZTA1OTNmIn0sImlhdCI6MTcxMjU0NTgyN30.wkRD4c2f2BLt58YG74XycTGIYS5nR6c777pRW9K8g3g");
+  getCoordinates();
+}, []);
+
+  useEffect(() => {
+    if (userCoordinates && userCoordinates.coordinates && userCoordinates.coordinates.length > 0) {
+        console.log(userCoordinates);
+        const [lat, lng] = userCoordinates.coordinates[0]; // Extract lat and lng from the array
+        if (lat && lng) {
+            setCenter({ lat, lng });
+        }
+    }
+
+}, [userCoordinates]);
+
+
 
   return (
     <>
@@ -102,93 +132,53 @@ export default function AdminTable() {
                 </div>
               </th>
               <th scope="col" className="px-6 py-3">
-                {/* <div className="flex">
-                  <span>Location Name</span>
-                  <span className="pt-1 pl-2">
-                    <FaArrowDown />
-                  </span>
-                </div> */}
                 Location Name
               </th>
               <th scope="col" className="px-6 py-3 ">
-                {/* <div className="flex">
-                  <span>City</span>
-                  <span className="pt-1 pl-2">
-                    <FaArrowDown />
-                  </span>
-                </div> */}
+
                 City
               </th>
               <th scope="col" className="px-6 py-3">
-                {/* <div className="flex">
-                  <span>Distance</span>
-                  <span className="pt-1 pl-2">
-                    <FaArrowDown />
-                  </span>
-                </div> */}
+
                 Distance
               </th>
               <th scope="col" className="px-6 py-3">
-                {/* <div className="flex">
-                  <span>Status</span>
-                  <span className="pt-1 pl-2">
-                    <FaArrowDown />
-                  </span>
-                </div> */}
                 Status
               </th>
               <th scope="col" className="px-6 py-3">
-                {/* <div className="flex">
-                  <span>Time Left</span>
-                  <span className="pt-1 pl-2">
-                    <FaArrowDown />
-                  </span>
-                </div> */}
                 Time Left
               </th>
               <th scope="col" className="px-6 py-3">
-                {/* <div className="flex">
-                  <span>Access</span>
-                  <span className="pt-1 pl-2">
-                    <FaArrowDown />
-                  </span>
-                </div> */}
                 Access
               </th>
               <th scope="col" className="px-6 py-3"></th>
             </tr>
           </thead>
           <tbody>
-            {tableData.map((item) => (
+            {places && places.map((item, index) => (
               <tr
-                key={item.id}
+                key={index}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <td className="w-4 p-4">
                   <div className="flex items-center">
                     <input
-                      id={`checkbox-table-${item.id}`}
+                      id={`checkbox-table-${item._id}`}
                       type="checkbox"
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     />
-                    <label
-                      htmlFor={`checkbox-table-${item.id}`}
-                      className="sr-only"
-                    >
-                      checkbox
-                    </label>
                   </div>
                 </td>
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {item.locationName}
+                  {item.name}
                 </th>
-                <td className="px-6 py-4">{item.city}</td>
-                <td className="px-6 py-4">{item.distance}</td>
+                <td className="px-6 py-4">{item.address}</td>
+                <td className="px-6 py-4">{calculateDistance(center.lat, center.lng, item.coordinates[0], item.coordinates[1])}</td>
                 <td className="px-6 py-4 flex items-center">
-                  <span>{item.status}</span>
+                  {/* <span>{getStatus(item.expiration)}</span> */}
                   <span className="mt-1 pl-2">
                     <TbRefresh />
                   </span>

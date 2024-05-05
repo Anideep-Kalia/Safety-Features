@@ -139,6 +139,8 @@ function App() {
       console.log("Geolocation is not supported by this browser.");
     }
   }, []);
+
+  
   const handlemenuclick = async (station) => {
     setDestination2({ lat: station.geometry.location.lat, lng: station.geometry.location.lng });
     const directionsService2 = new window.google.maps.DirectionsService();
@@ -334,6 +336,9 @@ function App() {
                 >
                   ... More
                 </button>
+                <div className={`bg-white text-black font-semibold flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base   ${distance ? "visible" : "hidden"}`}>
+                 Distance: {distance} Duration: {duration}
+                </div>
               </div>
             </HStack>
           </Box>
