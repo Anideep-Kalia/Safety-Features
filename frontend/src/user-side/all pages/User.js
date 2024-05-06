@@ -27,7 +27,7 @@ function App() {
   });
 
   const [center, setCenter] = useState({ lat: null, lng: null });
-  const [map, setMap] = useState(/** @type google.maps.Map */ (null));
+  const [map, setMap] = useState(/** @type google.maps.Map */(null));
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [distance, setDistance] = useState("");
   const [duration, setDuration] = useState("");
@@ -35,7 +35,7 @@ function App() {
   const [hospital, setHospital] = useState([]);
   const [zoom, setZoom] = useState(15);
   const [showModal, setModal] = useState(false);
-  const [clicked , setClicked] = useState(false);
+  const [clicked, setClicked] = useState(false);
   const [destination2, setDestination2] = useState([]);
 
   const destiantionRef = useRef()
@@ -140,7 +140,7 @@ function App() {
     }
   }, []);
 
-  
+
   const handlemenuclick = async (station) => {
     setDestination2({ lat: station.geometry.location.lat, lng: station.geometry.location.lng });
     const directionsService2 = new window.google.maps.DirectionsService();
@@ -200,7 +200,9 @@ function App() {
     setDirectionsResponse(results);
     setDistance(results.routes[0].legs[0].distance.text);
     setDuration(results.routes[0].legs[0].duration.text);
+    setModal(true); // Open modal when marker is clicked
   };
+
 
   return (
     <Flex
@@ -262,8 +264,21 @@ function App() {
           ))}
 
           {directionsResponse && (
-            <DirectionsRenderer directions={directionsResponse} />
+            <>
+              <DirectionsRenderer
+                directions={directionsResponse}
+                options={{
+                  suppressMarkers: true, // Suppress default markers
+                  polylineOptions: {
+                    strokeColor: "blue", // Color of the route line
+                  },
+                }}
+                panel={document.getElementById("directionsPanel")} // HTML element to display turn-by-turn instructions
+              />
+              <div id="directionsPanel" className="h-full overflow-y-auto bg-white p-4 border border-gray-300"></div>
+            </>
           )}
+
         </GoogleMap>
       </Box>
       <div className="flex flex-row w-full justify-between px-[2rem] items-center mt-4 border border-white ">
@@ -281,74 +296,74 @@ function App() {
               <div className="rounded-full flex flex-row justify-center items-center px-4 gap-2 bg-black bg-opacity-5 m-2 ">
                 <FaLocationDot />
                 <Autocomplete>
-                <input
-                  type="text"
-                  className="focus:outline-none  w-[20rem] h-[3.4rem] rounded-full bg-transparent  placeholder:text-[#1F2521]"
-                  placeholder="Search by police station, name, etc.."
-                  ref={destiantionRef}
+                  <input
+                    type="text"
+                    className="focus:outline-none  w-[20rem] h-[3.4rem] rounded-full bg-transparent  placeholder:text-[#1F2521]"
+                    placeholder="Search by police station, name, etc.."
+                    ref={destiantionRef}
 
-                />  
+                  />
                 </Autocomplete>
-                
+
               </div>
             </HStack>
           </Box>
-          {clicked && 
-          <Box position='absolute' left={0} top={0} h='100%' w='40%' bgColor='white' p={4} shadow='base'>
-          <VStack align='start' spacing={4}>
-              {clicked && clicked.map((station, index) => (
-              <>
-                <Box key={index} onClick={() => handlemenuclick(station)} cursor='pointer' p={2} borderRadius='md'>
-                  <Text fontSize='md' fontWeight='bold'>{station.name}</Text>
-                  <Text fontSize='sm'>{station.vicinity}</Text>
-                </Box>
-                </>
-              ))}
-            </VStack>
+          {clicked &&
+            <Box position='absolute' left={0} top={0} h='100%' w='40%' bgColor='white' p={4} shadow='base'>
+              <VStack align='start' spacing={4}>
+                {clicked && clicked.map((station, index) => (
+                  <>
+                    <Box key={index} onClick={() => handlemenuclick(station)} cursor='pointer' p={2} borderRadius='md'>
+                      <Text fontSize='md' fontWeight='bold'>{station.name}</Text>
+                      <Text fontSize='sm'>{station.vicinity}</Text>
+                    </Box>
+                  </>
+                ))}
+              </VStack>
             </Box>
           }
           <div className="flex flex-col justify-center items-center ">
-          <Box
-            p={4}
-            m={4}
-            shadow="base"
-            minW="container.md"
-            zIndex="1"
-            className=" shadow-2xl "
-          >
-            <HStack spacing={4} justifyContent="space-between">
-              <div className=" flex flex-row justify-center items-center gap-2">
-                <button onClick={()=> handleButtonClick('police')} className="bg-[#4E7690] flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base  text-white">
-                  <img src="police-button.png" alt="" />
-                  Police Station
-                </button>
-                <button className="bg-[#4E7690] flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base  text-white">
-                  <img src="petrol.png" alt="" />
-                  Petrol
-                </button>
-                <button className="bg-[#4E7690] flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base  text-white">
-                  <img src="medical.png" alt="" />
-                  Hospital / Clinics
-                </button>
-                <button
-                  onClick={() => setModal(!showModal)}
-                  className="bg-[#4E7690] flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base  text-white"
-                >
-                  ... More
-                </button>
-                <div className={`bg-white text-black font-semibold flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base   ${distance ? "visible" : "hidden"}`}>
-                 Distance: {distance} Duration: {duration}
+            <Box
+              p={4}
+              m={4}
+              shadow="base"
+              minW="container.md"
+              zIndex="1"
+              className=" shadow-2xl "
+            >
+              <HStack spacing={4} justifyContent="space-between">
+                <div className=" flex flex-row justify-center items-center gap-2">
+                  <button onClick={() => handleButtonClick('police')} className="bg-[#4E7690] flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base  text-white">
+                    <img src="police-button.png" alt="" />
+                    Police Station
+                  </button>
+                  <button className="bg-[#4E7690] flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base  text-white">
+                    <img src="petrol.png" alt="" />
+                    Petrol
+                  </button>
+                  <button className="bg-[#4E7690] flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base  text-white">
+                    <img src="medical.png" alt="" />
+                    Hospital / Clinics
+                  </button>
+                  <button
+                    onClick={() => setModal(!showModal)}
+                    className="bg-[#4E7690] flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base  text-white"
+                  >
+                    ... More
+                  </button>
+                  <div className={`bg-white text-black font-semibold flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base   ${distance ? "visible" : "hidden"}`}>
+                    Distance: {distance} Duration: {duration}
+                  </div>
                 </div>
+              </HStack>
+            </Box>
+            {showModal && (
+              <div className="bg-white rounded-xl relative ">
+                <button text-white>Apply</button>
               </div>
-            </HStack>
-          </Box>
-          {showModal && (
-            <div className="bg-white rounded-xl relative ">
-              <button text-white>Apply</button>
-            </div>
-          )}
+            )}
           </div>
-          
+
         </div>
 
         {/* <Box
