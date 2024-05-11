@@ -19,7 +19,9 @@ import {
 import { useRef, useState, useEffect } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPlus, FaMinus } from "react-icons/fa";
-
+import './styles/User.css';
+import { IoCloseCircleSharp, IoSearchCircleSharp } from "react-icons/io5";
+import { IoMdCloseCircle } from "react-icons/io";
 function App() {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyBVzhfAB_XLqaayJkOSuThEdaK4vifdxAI",
@@ -36,7 +38,23 @@ function App() {
   const [zoom, setZoom] = useState(15);
   const [showModal, setModal] = useState(false);
   const [clicked , setClicked] = useState(false);
+  const [optionClicked, setOptionClicked] = useState(false);
+  const [left, setLeft] = useState(false);
   const [destination2, setDestination2] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const category = [ 
+    'Metro Station', 'Airports', 'Government Buildings', 'Heritage Monuments', 'Army Area', 'Para Police', 'Railway Police Force', 'Quarters'
+  ];
+
+  const toggleSelection = (id) => {
+    if(selectedOptions.includes(id)){
+      setSelectedOptions(selectedOptions.filter(item => item !== id));
+    }
+    else
+    {
+      setSelectedOptions([...selectedOptions, id]);
+    }
+  }
 
   const destiantionRef = useRef()
 
@@ -266,8 +284,10 @@ function App() {
           )}
         </GoogleMap>
       </Box>
-      <div className="flex flex-row w-full justify-between px-[2rem] items-center mt-4 border border-white ">
-        <div className="flex flex-row justify-center items-center">
+      <div className="flex flex-col  z-10 w-full ">
+      <div className="flex flex-row w-full  justify-between px-[2rem] z-10  items-center mt-4  ">
+        <div className="flex flex-row justify-center items-center  gap-11  z-10 ">
+          <div className="flex flex-col justify-center items-center">
           <Box
             p={4}
             m={4}
@@ -291,23 +311,16 @@ function App() {
                 </Autocomplete>
                 
               </div>
+
             </HStack>
+         
           </Box>
-          {clicked && 
-          <Box position='absolute' left={0} top={0} h='100%' w='40%' bgColor='white' p={4} shadow='base'>
-          <VStack align='start' spacing={4}>
-              {clicked && clicked.map((station, index) => (
-              <>
-                <Box key={index} onClick={() => handlemenuclick(station)} cursor='pointer' p={2} borderRadius='md'>
-                  <Text fontSize='md' fontWeight='bold'>{station.name}</Text>
-                  <Text fontSize='sm'>{station.vicinity}</Text>
-                </Box>
-                </>
-              ))}
-            </VStack>
-            </Box>
-          }
-          <div className="flex flex-col justify-center items-center ">
+    
+          </div>
+          
+
+          
+          <div className="flex flex-col justify-center items-center  ">
           <Box
             p={4}
             m={4}
@@ -322,16 +335,18 @@ function App() {
                   <img src="police-button.png" alt="" />
                   Police Station
                 </button>
-                <button className="bg-[#4E7690] flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base  text-white">
+                <button onClick={()=> handleButtonClick('pump')} className="bg-[#4E7690] flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base  text-white">
                   <img src="petrol.png" alt="" />
                   Petrol
                 </button>
-                <button className="bg-[#4E7690] flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base  text-white">
+                <button onClick={()=> handleButtonClick('hospital')} className="bg-[#4E7690] flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base  text-white">
                   <img src="medical.png" alt="" />
                   Hospital / Clinics
                 </button>
                 <button
-                  onClick={() => setModal(!showModal)}
+                  onClick={() => {setOptionClicked(!optionClicked)
+                    // handleButtonClick('hospital')
+                  }}
                   className="bg-[#4E7690] flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base  text-white"
                 >
                   ... More
@@ -342,38 +357,10 @@ function App() {
               </div>
             </HStack>
           </Box>
-          {showModal && (
-            <div className="bg-white rounded-xl relative ">
-              <button text-white>Apply</button>
-            </div>
-          )}
           </div>
           
         </div>
 
-        {/* <Box
-          p={4}
-          borderRadius="lg"
-          m={4}
-          bgColor="white"
-          shadow="base"
-          minW="container.md"
-          zIndex="1"
-        >
-          <HStack spacing={4} mt={4} justifyContent="space-between">
-            <Text>Distance: {distance} </Text>
-            <Text>Duration: {duration} </Text>
-            <IconButton
-              aria-label="center back"
-              icon={<FaLocationArrow />}
-              isRound
-              onClick={() => {
-                map.panTo(center);
-                map.setZoom(15);
-              }}
-            />
-          </HStack>
-        </Box> */}
         <Box
           p={4}
           m={4}
@@ -393,7 +380,85 @@ function App() {
           </HStack>
         </Box>
       </div>
-    </Flex>
+      <div className="relative  flex flex-row">
+      <Box position='relative' className={`border-2  mx-8 mt-2 rounded-xl ${clicked? "visible animate-slide-right" : "hidden animate-slide-left"}   `} zIndex={10}  h='50vh' w='26%' bgColor='#EEEBE7' p={4} shadow='base'> 
+          
+          <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-row justify-between w-full px-4 pt-2 pb-2 border-b items-center border-black">
+         <div className="gap-3 flex items-center">
+         <IoSearchCircleSharp className="w-[2.5rem] h-[2.5rem] text-[#979797]"/>
+            <p className="text-lg font-semibold">{clicked.length} found</p>
+         </div>
+         <div className="bg-black rounded-full w-[2rem] h-[2rem]">
+         <IoCloseCircleSharp className="w-[2rem] h-[2rem] text-[#D9D9D9] " onClick={() => {
+          setLeft(true);
+          setClicked(false);
+         }}/>
+         </div>
+            
+
+            </div>
+            <Box  className="mx-8 mt-2 rounded-xl overflow-auto  scrollbar-hide  pr-[1.25rem] py-2 " zIndex={10}  h='40vh' w='100%' bgColor='#EEEBE7'  shadow='base'>
+            <div className="overflow-auto h-full">
+            <VStack align='start' spacing={4} className="overflow-auto">
+              {clicked && clicked.map((station, index) => (
+              <>
+                <Box key={index} onClick={() => handlemenuclick(station)} cursor='pointer' className=" px-4 py-2" borderRadius='md'>
+                  <Text fontSize='md' fontWeight='bold'>{station.name}</Text>
+                  {/* <Text className="text-sm" >{distance}</Text> */}
+                  <Text className="text-sm">{station.vicinity}</Text>
+                </Box>
+                </>
+              ))}
+            </VStack>
+            </div>
+            
+            </Box>
+
+          </div>
+          </Box>
+          <Box position='relative' className={`border-2  mx-12 mt-2 rounded-xl ${clicked? "" : "left-[30.2%]"} ${optionClicked? "visible animate-slide-left" : "hidden "}   `} zIndex={10}  h='50vh' w='32%' bgColor='white' p={4} shadow='base'> 
+          
+          <div className="flex flex-col justify-center items-center">
+          <h1 className="text-left font-bold text-xl w-full px-4 py-2 mb-4" >Select Categories</h1>
+            <Box  className="mx-8 mt-2 rounded-xl overflow-auto  px-[1.25rem] py-2 " zIndex={10}  h='30vh' w='100%' bgColor='white'  shadow='base'>
+          
+            <div className="overflow-auto   w-full flex flex-wrap gap-x-2 gap-y-2">
+            {/* <HStack align='start' spacing={4} className="overflow-auto"> */}
+              {optionClicked && category.map((station, index) => (
+              <div className={`flex justify-center  rounded-xl w-fit h-fit hover:border hover:border-[#1F2521]  items-center px-3 py-3 ${selectedOptions.includes(station) ? "bg-[#1F2521] text-[#FFFFFF]" : "bg-[#DADADA] text-[#1F2521] "} `} onClick={() => toggleSelection(station)}>
+                <p className=" text-base font-medium">{station}</p>
+              </div>
+    
+              ))}
+            {/* </HStack> */}
+            </div>
+            </Box>
+            <div className="flex flex-row justify-end w-full px-4 pt-2 pb-2 items-center">
+         <div className="gap-3 flex items-center">
+         <button className="text-base border border-black text-black px-4 py-3 rounded-xl hover:scale-95  "
+         onClick={() => {
+          setOptionClicked(false);
+          setSelectedOptions([]);
+         }}  >
+          Cancel
+         </button>
+       <button className="text-base bg-[#4E7690] text-white px-4 py-3 rounded-xl hover:scale-95" onClick={() => {setOptionClicked(false)}} >
+        
+        Apply {selectedOptions.length >0 && <>({selectedOptions.length})</>}
+       </button>
+         </div>
+            
+
+            </div>
+
+          </div>
+                      </Box>
+      </div>
+       
+                           
+      </div>
+          </Flex>
   );
 }
 

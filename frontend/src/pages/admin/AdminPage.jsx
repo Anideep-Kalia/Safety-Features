@@ -16,17 +16,12 @@ const Admin=()=>{
 
       },[localStorage.getItem('token')]);
 
-    return <div className='flex'>
-        <div className='flex-initial w-56'>
-            <AdminSidebar/>
-        </div>
-     <div className='flex-auto'>
-            <AdminNavbar/>
-            <AddNewLocationBar />
-            <AdminTable/>
-        </div>
-    
-    </div>
+    return (
+        <div className="w-[80px] md:w-[250px] sticky top-[5rem]">
+        <AdminSidebar active={3} />
+      </div>
+
+    )
 }
 
 export default Admin
