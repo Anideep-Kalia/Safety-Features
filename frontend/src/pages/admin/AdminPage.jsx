@@ -1,11 +1,10 @@
 
 import AdminNavbar from "../../components/admin/AdminNavbar"
 import AdminSidebar from "../../components/admin/AdminSidebar"
-import AddNewLocationBar from "../../components/admin/AddNewLocationBar";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdminDashboard from '../../components/admin/AdminDashboard';
-import AddLocationPopup from "../../components/admin/AddLocationPopup";
+
 const Admin=()=>{
  const navigate = useNavigate();
 
