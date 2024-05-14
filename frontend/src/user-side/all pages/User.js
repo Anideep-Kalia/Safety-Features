@@ -29,7 +29,7 @@ function App() {
   });
 
   const [center, setCenter] = useState({ lat: null, lng: null });
-  const [map, setMap] = useState(/** @type google.maps.Map */ (null));
+  const [map, setMap] = useState(/** @type google.maps.Map */(null));
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [distance, setDistance] = useState("");
   const [duration, setDuration] = useState("");
@@ -158,7 +158,7 @@ function App() {
     }
   }, []);
 
-  
+
   const handlemenuclick = async (station) => {
     setDestination2({ lat: station.geometry.location.lat, lng: station.geometry.location.lng });
     const directionsService2 = new window.google.maps.DirectionsService();
@@ -218,7 +218,9 @@ function App() {
     setDirectionsResponse(results);
     setDistance(results.routes[0].legs[0].distance.text);
     setDuration(results.routes[0].legs[0].duration.text);
+    setModal(true); // Open modal when marker is clicked
   };
+
 
   return (
     <Flex
@@ -280,8 +282,21 @@ function App() {
           ))}
 
           {directionsResponse && (
-            <DirectionsRenderer directions={directionsResponse} />
+            <>
+              <DirectionsRenderer
+                directions={directionsResponse}
+                options={{
+                  suppressMarkers: true, // Suppress default markers
+                  polylineOptions: {
+                    strokeColor: "blue", // Color of the route line
+                  },
+                }}
+                panel={document.getElementById("directionsPanel")} // HTML element to display turn-by-turn instructions
+              />
+              <div id="directionsPanel" className="h-full overflow-y-auto bg-white p-4 border border-gray-300"></div>
+            </>
           )}
+
         </GoogleMap>
       </Box>
       <div className="flex flex-col  z-10 w-full ">
@@ -301,15 +316,15 @@ function App() {
               <div className="rounded-full flex flex-row justify-center items-center px-4 gap-2 bg-black bg-opacity-5 m-2 ">
                 <FaLocationDot />
                 <Autocomplete>
-                <input
-                  type="text"
-                  className="focus:outline-none  w-[20rem] h-[3.4rem] rounded-full bg-transparent  placeholder:text-[#1F2521]"
-                  placeholder="Search by police station, name, etc.."
-                  ref={destiantionRef}
+                  <input
+                    type="text"
+                    className="focus:outline-none  w-[20rem] h-[3.4rem] rounded-full bg-transparent  placeholder:text-[#1F2521]"
+                    placeholder="Search by police station, name, etc.."
+                    ref={destiantionRef}
 
-                />  
+                  />
                 </Autocomplete>
-                
+
               </div>
 
             </HStack>
@@ -351,14 +366,14 @@ function App() {
                 >
                   ... More
                 </button>
+                </div>
                 <div className={`bg-white text-black font-semibold flex  justify-center items-center gap-2 py-3 px-4 rounded-[0.75rem] text-base   ${distance ? "visible" : "hidden"}`}>
                  Distance: {distance} Duration: {duration}
                 </div>
-              </div>
-            </HStack>
-          </Box>
+              </HStack>
+            </Box>
           </div>
-          
+
         </div>
 
         <Box
