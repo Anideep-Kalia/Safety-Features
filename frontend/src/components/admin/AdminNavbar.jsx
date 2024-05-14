@@ -1,134 +1,85 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import bhajan_lal from "../../images/bhajan_lal.webp";
+import { FaChevronDown } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
-import { IoIosArrowBack } from "react-icons/io";
+import React from 'react'
+import { FaAngleLeft } from "react-icons/fa6";
+import { IoSearchOutline } from "react-icons/io5";
+import { PiBellLight } from "react-icons/pi";
+import { useState } from "react";
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
-  const navigate = useNavigate();
+function AdminNavbar() {
+  const [copied, setCopied] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1000); // Reset copied state after 2 seconds
+      })
+      .catch((err) => console.error('Failed to copy:', err));
   };
 
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsOpen(false);
-    }
-  };
-  
-
-
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
   return (
-    <>
-      <nav class=" py-4 px-6 flex justify-between items-center w-full ">
-        <div className="text-3xl text-[#4E7690] mr-12 rounded-full shadow-md">
-          <IoIosArrowBack />
+    <header className='fixed top-0 flex justify-between items-center h-[4rem] z-10 mt-2 w-full '>
+      <div className='flex justify-start items-center w-[300px] pl-6 gap-2  py-2 '>
+      <img src='/emblem.png' alt='emblem' className='w-[2.5rem] h-[2.5rem]'/>
+        <img src='/police.png' alt='police' className='w-[2.5rem] h-[2.5rem]'/>
+    <p className='text-[14px] text-[#1E1E1E] font-semibold'>Rajasthan Police</p>
+      </div>
+      <div className="flex justify-between  w-full items-center">
+      <div className='flex justify-center items-center px-2 gap-4'>
+        <div className='rounded-full shadow-md w-10 h-10 flex justify-center  items-center'>
+         <FaAngleLeft className='text-[#4E7690]'/>
         </div>
-        <div className="flex-auto text-sm text-[#4E7690] ">Categories</div>
-        <div className="relative flex w-1/2 rounded-full">
-          <input
-            type="search"
-            className=" relative m-0 -me-0.5 block flex-auto rounded-tl-full rounded-bl-full bg-slate-200 bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-surface outline-none transition duration-200 ease-in-out placeholder:text-neutral-500 focus:z-[3] focus:border-primary focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white dark:placeholder:text-neutral-200 dark:autofill:shadow-autofill dark:focus:border-primary"
-            placeholder="Search"
-            aria-label="Search"
-            id="exampleFormControlInput3"
-            aria-describedby="button-addon3"
+        <p className='text-[#71839B] text-[16px] font-medium'>Categories</p>
+      </div>
+      <div className='rounded-[50px] bg-[#7E7E7E14] w-[550px] flex justify-center items-center h-14'>
+       <div className="w-[80%] flex justify-center items-center">
+       <IoSearchOutline className=' w-6 h-6 text-[#BBCACC] '/>
+        <input
+        type='text'
+        placeholder='Search ...'
+        className='bg-transparent w-[80%] px-2 appearance-none focus:outline-none placeholder:text-[#BBCACC] font-normal'
+        />
+       </div>
+       
+        <button className='w-[20%] bg-[#4E7690] rounded-[50px] text-white py-2 mr-2'>
+          Search
+        </button>
+      </div>
+      <div className="flex justify-center items-center gap-12 px-1 w-[300px] ">
+        <div className="flex justify-center items-center gap-3 ">
+        <PiBellLight
+        className=" w-6 h-6 text-[#4E7690]"
+        />
+        <IoSettingsOutline className=" w-6 h-6 text-[#4E7690]"/>
+        </div>
+        <div className="flex justify-center items-center gap-3">
+       <div className="rounded-[50px]  flex justify-center items-center shadow-md w-[3rem] h-[3rem] ">
+        <img
+        src="/profile.svg"
+        alt="im"
+        />
+       </div>
+       <div className="flex flex-col justify-center items-center">
+        <h1 className="text-[14px] font-medium text-[#71839B]">Chulbul pandey</h1>
+        <div className="flex justify-center items-center gap-2">
+          <p className="text-[12px] flex justify-center items-center gap-1 font-bold cursor-pointer text-[#4E7690]"
+          onClick={()=> {copyToClipboard('123456')}}
+          >{copied ? 'Copied!' : '123456'}
+          <img
+          src="/ion_copy.svg"
+          alt='im'
           />
-          <button
-            className="z-[2] inline-block rounded-tr-full rounded-br-full bg-[#4E7690] text-white rounded-e border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-accent-300 hover:bg-primary-50/50 hover:text-primary-accent-300 focus:border-primary-600 focus:bg-primary-50/50 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:text-primary-500 dark:hover:bg-blue-950 dark:focus:bg-blue-950"
-            data-twe-ripple-init
-            data-twe-ripple-color="white"
-            type="button"
-            id="button-addon3"
-          >
-            Search
-          </button>
+          </p>
+          <FaChevronDown className="text-[#71839B] w-4 h-4"/>
         </div>
-        <div className="flex-initial w-56">
-          <div className="flex justify-center items-center">
-            <div className="flex-initial pl-10 pr-8 text-[#4E7690]">
-              <IoSettingsOutline />
-            </div>
-            <div className="relative inline-block z-50" ref={dropdownRef}>
-              <div
-                className="flex items-center cursor-pointer"
-                onClick={toggleDropdown}
-              >
-                <div className="w-12">
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src={bhajan_lal}
-                    alt="Rounded avatar"
-                  />
-                </div>
-                <div className="flex flex-col justify-center text-xs">
-                  <div className="text-[#4E7690]">chulbul Pandey</div>
-                  <div className="text-[#4E7690] font-bold">204389</div>
-                </div>
-                <div className="ml-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 text-[#4E7690]"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 011.414-1.414L10 9.586l3.293-3.293a1 1 0 111.414 1.414l-4 4A1 1 0 0110 12z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </div>
-              {isOpen && (
-                <div
-                  className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="options-menu"
-                >
-                  <div className="py-1" role="none">
-                    {/* Dropdown menu items */}
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      role="menuitem"
-                    >
-                      Settings
-                    </a>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      role="menuitem"
-                    >
-                      Profile
-                    </a>
-                    <button
-                      onClick={() => {localStorage.removeItem('token');
-                    navigate('/admin/login');}}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      role="menuitem"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+       </div>
         </div>
-      </nav>
-    </>
-  );
-};
+      </div>
+      </div>
+      
+    </header>
+  )
+}
 
-export default Navbar;
+export default AdminNavbar

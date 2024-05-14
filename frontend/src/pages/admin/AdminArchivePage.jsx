@@ -1,11 +1,11 @@
 
+import AdminArchive from "../../components/admin/AdminArchive";
+import AdminLocation from "../../components/admin/AdminLocation";
 import AdminNavbar from "../../components/admin/AdminNavbar"
 import AdminSidebar from "../../components/admin/AdminSidebar"
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AdminDashboard from '../../components/admin/AdminDashboard';
-
-const Admin=()=>{
+const AdminArchivePage=()=>{
  const navigate = useNavigate();
 
     useEffect(  ()=>{
@@ -22,12 +22,11 @@ const Admin=()=>{
         <div className="w-full flex">
         <div className="flex items-start justify-between w-full mt-[4.5rem]">
           <div className="w-[80px] md:w-[300px] sticky top-[5rem]">
-            <AdminSidebar active={1} />
+            <AdminSidebar active={2} />
           </div>
           <div className="flex flex-col justify-center relative w-full p-4  mt-2">
             <div>
-            <AdminDashboard />
-            {/* <AddLocationPopup/> */}
+            <AdminArchive/>
             </div>
            
           </div>
@@ -39,4 +38,4 @@ const Admin=()=>{
     )
 }
 
-export default Admin
+export default AdminArchivePage
